@@ -1,9 +1,10 @@
-import { ModeToggle } from "@/components/mode-toggle";
+import { Navbar } from "@/components/navbar";
 
 export default function Home() {
   return (
-    <main className="container mx-auto p-5">
-      <ModeToggle />
-    </main>
+    <>
+      <Navbar />
+      <main className="container mx-auto"></main>
+    </>
   );
 }

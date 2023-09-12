@@ -1,13 +1,14 @@
 import React from "react";
 
 type Props = {
-  promise: Promise<Todo[]>;
+  // promise: Promise<Todo[]>;
+  todos: Todo[] | null;
 };
 
-export default async function Todos({ promise }: Props) {
-  const todos = await promise;
+export default async function Todos({ todos }: Props) {
+  // const todos = await promise;
 
-  const content = todos.map((todo) => {
+  const content = todos?.map((todo) => {
     return (
       <li
         key={todo.id}

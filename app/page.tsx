@@ -12,7 +12,7 @@ export default function Home() {
 
   useEffect(() => {
     // Fetch data from the API route
-    fetch("/api/hello")
+    fetch("/api/getTodos")
       .then((response) => response.json())
       .then((data) => {
         setTodos(data.data);

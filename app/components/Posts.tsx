@@ -2,10 +2,10 @@ import React from "react";
 
 type Props = {
   // promise: Promise<Todo[]>;
-  todos: Todo[] | null;
+  todos: Post[] | null;
 };
 
-export default async function Todos({ todos }: Props) {
+export default async function Posts({ todos }: Props) {
   // const todos = await promise;
 
   const content = todos?.map((todo) => {
@@ -16,7 +16,7 @@ export default async function Todos({ todos }: Props) {
       >
         <div className="flex">
           {/* <Checkbox /> */}
-          <span>{todo.title}</span>
+          <span>{todo.content}</span>
         </div>
       </li>
     );

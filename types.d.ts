@@ -1,6 +1,6 @@
-type Todo = {
-  userId: number;
+type Post = {
   id: number;
-  title: string;
+  createdAt: Date;
+  content: string;
   completed: boolean;
 };

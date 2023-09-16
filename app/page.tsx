@@ -41,13 +41,11 @@ export default function Home() {
 
   return (
     <>
-      <main className="container mx-auto">
-        <ul className="flex flex-col space-y-5 items-center mt-10">
-          <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
-            <Posts todos={posts} deletePost={deletePost}></Posts>
-          </Suspense>
-        </ul>
-      </main>
+      <ul className="flex flex-col space-y-5 items-center mt-10">
+        <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
+          <Posts todos={posts} deletePost={deletePost}></Posts>
+        </Suspense>
+      </ul>
     </>
   );
 }

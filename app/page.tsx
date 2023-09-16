@@ -1,7 +1,7 @@
 "use client";
 
 import { Suspense, useEffect, useState } from "react";
-import Posts from "./components/Posts";
+import Posts from "@/components/posts";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | null>(null);

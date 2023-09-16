@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -10,17 +10,33 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-
 import { Button } from "./ui/button";
+import { Loader2 } from "lucide-react";
 
-export default function DeleteDialog() {
+type Props = {
+  postId: number;
+  deletePost: (id: number) => void;
+};
+
+export default function DeleteDialog({ postId, deletePost }: Props) {
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  function handleDeleteClick() {
+    setIsDeleting(true);
+  }
   return (
     <AlertDialog>
       <AlertDialogTrigger>
-        <Button className="h-8" variant="destructive">
-          {/* <Trash2 className="mr-2 h-4 w-4" /> */}
-          Delete
-        </Button>
+        {isDeleting ? (
+          <Button disabled className="h-8" variant="destructive">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Please wait
+          </Button>
+        ) : (
+          <Button className="h-8" variant="destructive">
+            Delete
+          </Button>
+        )}
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
@@ -31,7 +47,14 @@ export default function DeleteDialog() {
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogAction
+            onClick={() => {
+              deletePost(postId);
+              handleDeleteClick();
+            }}
+          >
+            Delete
+          </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

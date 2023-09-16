@@ -1,16 +1,13 @@
+import React from "react";
 import DeleteDialog from "@/components/delete-dialog";
 import EditDialog from "@/components/edit-dialog";
-import { Pencil, Trash2 } from "lucide-react";
-import React from "react";
 
 type Props = {
-  // promise: Promise<Todo[]>;
+  deletePost: (id: number) => void;
   todos: Post[] | null;
 };
 
-export default async function Posts({ todos }: Props) {
-  // const todos = await promise;
-
+export default function Posts({ todos, deletePost }: Props) {
   const content = todos?.map((todo) => {
     return (
       <li
@@ -22,7 +19,7 @@ export default async function Posts({ todos }: Props) {
           <span>{todo.content}</span>
           <span className="flex gap-1">
             <EditDialog />
-            <DeleteDialog />
+            <DeleteDialog deletePost={deletePost} postId={todo.id} />
           </span>
         </div>
       </li>

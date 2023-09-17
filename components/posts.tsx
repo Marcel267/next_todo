@@ -12,7 +12,7 @@ export default function Posts({ todos, deletePost }: Props) {
     return (
       <li
         key={todo.id}
-        className="rounded-lg border bg-card text-card-foreground shadow-sm w-[450px] p-4"
+        className="rounded-lg border bg-card text-card-foreground shadow-sm p-4 w-full"
       >
         <div className="flex flex-col space-y-5">
           {/* <Checkbox /> */}

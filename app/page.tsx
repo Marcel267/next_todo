@@ -2,6 +2,7 @@
 
 import { Suspense, useEffect, useState } from "react";
 import Posts from "@/components/posts";
+import AddDialog from "@/components/add-dialog";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | null>(null);
@@ -39,13 +40,33 @@ export default function Home() {
     }
   }
 
+  async function addPost(content: string) {
+    try {
+      // const res = await fetch(`/api/addPost/${content}`, {
+      //   method: "POST",
+      // });
+
+      // if (res.ok) {
+      //   getPosts();
+      // } else {
+      //   console.error("Failed to add:", res.status);
+      // }
+      console.log(content);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
   return (
     <>
-      <ul className="flex flex-col space-y-5 items-center mt-10">
-        <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
-          <Posts todos={posts} deletePost={deletePost}></Posts>
-        </Suspense>
-      </ul>
+      <section className="flex flex-col items-center mt-10 mb-5">
+        <ul className="w-[450px] space-y-5">
+          <AddDialog addPost={addPost} />
+          <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
+            <Posts todos={posts} deletePost={deletePost}></Posts>
+          </Suspense>
+        </ul>
+      </section>
     </>
   );
 }

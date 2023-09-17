@@ -21,9 +21,6 @@ type Props = {
 export default function DeleteDialog({ postId, deletePost }: Props) {
   const [isDeleting, setIsDeleting] = useState(false);
 
-  function handleDeleteClick() {
-    setIsDeleting(true);
-  }
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -50,8 +47,9 @@ export default function DeleteDialog({ postId, deletePost }: Props) {
           <AlertDialogAction
             onClick={() => {
               deletePost(postId);
-              handleDeleteClick();
+              setIsDeleting(true);
             }}
+            className="bg-destructive text-destructive-foreground hover:bg-destructive/90"
           >
             Delete
           </AlertDialogAction>

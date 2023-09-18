@@ -47,7 +47,7 @@ export default function Home() {
         <ul className="w-[450px] space-y-5">
           <AddDialog getPosts={getPosts} />
           <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
-            <Posts todos={posts} deletePost={deletePost}></Posts>
+            <Posts todos={posts} deletePost={deletePost} getPosts={getPosts} />
           </Suspense>
         </ul>
       </section>

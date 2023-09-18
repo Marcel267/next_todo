@@ -3,25 +3,28 @@ import prisma from "@/lib/prisma";
 
 type Params = {
   content: string;
+  id: number;
 };
 
-export async function POST(request: Request) {
+export async function PUT(request: Request) {
   try {
     const params: Params = await request.json();
-    // console.log(params.content);
-    const createdPost = await prisma.post.create({
+
+    const updatedPost = await prisma.post.update({
+      where: {
+        id: params.id,
+      },
       data: {
         content: params.content,
-        completed: false,
       },
     });
 
-    if (!createdPost) {
-      throw new Error("Post could not be created");
+    if (!updatedPost) {
+      throw new Error("Post could not be edited");
     }
 
     return NextResponse.json(
-      { message: `Post with id ${createdPost.id} created` },
+      { message: `Post with id ${updatedPost.id} edited` },
       { status: 200 }
     );
     // return NextResponse.json({ message: `Post with id created` }, { status: 200 });

@@ -42,7 +42,7 @@ export default function AddDialog({ getPosts }: Props) {
       } else {
         console.error("Failed to add:", res.status);
       }
-      console.log(content);
+      console.log(res);
     } catch (error) {
       console.error("Error:", error);
     }

@@ -5,9 +5,10 @@ import EditDialog from "@/components/edit-dialog";
 type Props = {
   deletePost: (id: number) => void;
   todos: Post[] | null;
+  getPosts: () => void;
 };
 
-export default function Posts({ todos, deletePost }: Props) {
+export default function Posts({ todos, deletePost, getPosts }: Props) {
   const content = todos?.map((todo) => {
     return (
       <li
@@ -18,7 +19,11 @@ export default function Posts({ todos, deletePost }: Props) {
           {/* <Checkbox /> */}
           <span>{todo.content}</span>
           <span className="flex gap-1">
-            <EditDialog />
+            <EditDialog
+              getPosts={getPosts}
+              postId={todo.id}
+              value={todo.content}
+            />
             <DeleteDialog deletePost={deletePost} postId={todo.id} />
           </span>
         </div>

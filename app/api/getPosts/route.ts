@@ -7,7 +7,7 @@ export async function GET() {
       createdAt: "desc",
     },
   });
-  console.log(posts);
+  // console.log(posts);
 
   // const createMany = await prisma.post.createMany({
   //   data: [

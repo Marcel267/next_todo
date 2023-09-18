@@ -12,7 +12,7 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => {
         setPosts(data.posts);
-        console.log(data.posts);
+        // console.log(data.posts);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
@@ -21,6 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     getPosts();
+    // addPost("Fresh bleib, text schreiben");
   }, []);
 
   async function deletePost(id: number) {
@@ -31,7 +32,7 @@ export default function Home() {
 
       if (res.ok) {
         getPosts();
-        console.log("DELETED!!!!!!!!!!");
+        // console.log("DELETED!!!!!!!!!!");
       } else {
         console.error("Failed to delete:", res.status);
       }
@@ -42,15 +43,16 @@ export default function Home() {
 
   async function addPost(content: string) {
     try {
-      // const res = await fetch(`/api/addPost/${content}`, {
-      //   method: "POST",
-      // });
+      const res = await fetch(`/api/addPost`, {
+        method: "POST",
+        body: JSON.stringify({ content })
+      });
 
-      // if (res.ok) {
-      //   getPosts();
-      // } else {
-      //   console.error("Failed to add:", res.status);
-      // }
+      if (res.ok) {
+        getPosts();
+      } else {
+        console.error("Failed to add:", res.status);
+      }
       console.log(content);
     } catch (error) {
       console.error("Error:", error);

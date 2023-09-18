@@ -59,7 +59,7 @@ export default function AddDialog({ addPost }: Props) {
             onClick={() => {
               addPost(formData.content);
               setIsAdding(true);
-              // setFormData({ content: "" });
+              setFormData({ content: "" });
             }}
           >
             Save

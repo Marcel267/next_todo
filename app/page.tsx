@@ -41,29 +41,11 @@ export default function Home() {
     }
   }
 
-  async function addPost(content: string) {
-    try {
-      const res = await fetch(`/api/addPost`, {
-        method: "POST",
-        body: JSON.stringify({ content })
-      });
-
-      if (res.ok) {
-        getPosts();
-      } else {
-        console.error("Failed to add:", res.status);
-      }
-      console.log(content);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  }
-
   return (
     <>
       <section className="flex flex-col items-center mt-10 mb-5">
         <ul className="w-[450px] space-y-5">
-          <AddDialog addPost={addPost} />
+          <AddDialog getPosts={getPosts} />
           <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
             <Posts todos={posts} deletePost={deletePost}></Posts>
           </Suspense>

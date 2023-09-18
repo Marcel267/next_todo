@@ -70,7 +70,7 @@ export default function AddDialog({ getPosts }: Props) {
                 id="content"
                 name="content"
                 onChange={handleChangeEvent}
-                placeholder="Cool content..."
+                // placeholder="Cool content..."
                 value={formData.content}
               />
             </div>

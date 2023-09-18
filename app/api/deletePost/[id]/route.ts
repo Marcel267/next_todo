@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
-export async function DELETE(request: Request) {
+export async function PUT(request: Request) {
   try {
     const id = parseInt(request.url.slice(request.url.lastIndexOf("/") + 1));
 

@@ -15,39 +15,25 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 
 type Props = {
-  getPosts: () => void;
-  postId: number;
-  value: string;
+  editPost: (id: number, content: string, completed: boolean) => void;
+  isEditing: boolean;
+  setIsEditing: (isEditing: boolean) => void;
+  post: Post;
 };
 
-export default function EditDialog({ getPosts, postId, value }: Props) {
+export default function EditDialog({
+  post,
+  editPost,
+  isEditing,
+  setIsEditing,
+}: Props) {
   const [formData, setFormData] = useState({
-    content: value,
+    content: post.content,
   });
-  const [isEditing, setIsEditing] = useState(false);
 
   function handleChangeEvent(event: ChangeEvent<HTMLTextAreaElement>) {
     const { name, value } = event.target;
     setFormData({ ...formData, [name]: value });
-  }
-
-  async function editPost(content: string, id: number) {
-    try {
-      const res = await fetch(`/api/editPost`, {
-        method: "PUT",
-        body: JSON.stringify({ content, id }),
-      });
-
-      if (res.ok) {
-        getPosts();
-        setIsEditing(false);
-      } else {
-        console.error("Failed to add:", res.status);
-      }
-      console.log(res);
-    } catch (error) {
-      console.error("Error:", error);
-    }
   }
 
   return (
@@ -69,7 +55,7 @@ export default function EditDialog({ getPosts, postId, value }: Props) {
           <DialogHeader>
             <DialogTitle>Edit post</DialogTitle>
             <DialogDescription>
-              <div className="grid gap-2 mt-3">
+              <div className="mt-3 grid gap-2">
                 <Label htmlFor="content">Content</Label>
                 <Textarea
                   id="content"
@@ -84,7 +70,7 @@ export default function EditDialog({ getPosts, postId, value }: Props) {
           <DialogFooter>
             <DialogClose
               onClick={() => {
-                editPost(formData.content, postId);
+                editPost(post.id, formData.content, post.completed);
                 setIsEditing(true);
                 setFormData({ content: "" });
               }}

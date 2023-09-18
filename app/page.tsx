@@ -6,6 +6,7 @@ import AddDialog from "@/components/add-dialog";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[] | null>(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   async function getPosts() {
     fetch("/api/getPosts")
@@ -18,11 +19,6 @@ export default function Home() {
         console.error("Error fetching data:", error);
       });
   }
-
-  useEffect(() => {
-    getPosts();
-    // addPost("Fresh bleib, text schreiben");
-  }, []);
 
   async function deletePost(id: number) {
     try {
@@ -41,13 +37,45 @@ export default function Home() {
     }
   }
 
+  // @TODO: add switch for completed-status on editDialog
+  // @TODO: order posts by completed first, then by createdAt
+  async function editPost(id: number, content: string, completed: boolean) {
+    try {
+      const res = await fetch(`/api/editPost`, {
+        method: "PUT",
+        body: JSON.stringify({ id, content, completed }),
+      });
+
+      if (res.ok) {
+        getPosts();
+        setIsEditing(false);
+      } else {
+        console.error("Failed to add:", res.status);
+      }
+      console.log(res);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <>
-      <section className="flex flex-col items-center mt-10 mb-5">
+      <section className="mb-5 mt-10 flex flex-col items-center">
         <ul className="w-[450px] space-y-5">
           <AddDialog getPosts={getPosts} />
           <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
-            <Posts todos={posts} deletePost={deletePost} getPosts={getPosts} />
+            <Posts
+              posts={posts}
+              deletePost={deletePost}
+              getPosts={getPosts}
+              editPost={editPost}
+              isEditing={isEditing}
+              setIsEditing={setIsEditing}
+            />
           </Suspense>
         </ul>
       </section>

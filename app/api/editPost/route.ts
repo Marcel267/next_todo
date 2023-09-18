@@ -4,6 +4,7 @@ import prisma from "@/lib/prisma";
 type Params = {
   content: string;
   id: number;
+  completed: boolean;
 };
 
 export async function PUT(request: Request) {
@@ -16,6 +17,7 @@ export async function PUT(request: Request) {
       },
       data: {
         content: params.content,
+        completed: params.completed,
       },
     });
 
@@ -25,7 +27,7 @@ export async function PUT(request: Request) {
 
     return NextResponse.json(
       { message: `Post with id ${updatedPost.id} edited` },
-      { status: 200 }
+      { status: 200 },
     );
     // return NextResponse.json({ message: `Post with id created` }, { status: 200 });
   } catch (error) {

@@ -1,6 +1,6 @@
 type Post = {
   id: number;
-  createdAt: Date;
+  createdAt?: Date;
   content: string;
   completed: boolean;
 };

@@ -20,11 +20,6 @@ export default function Home() {
       });
   }
 
-  useEffect(() => {
-    getPosts();
-    // addPost("Fresh bleib, text schreiben");
-  }, []);
-
   async function deletePost(id: number) {
     try {
       const res = await fetch(`/api/deletePost/${id}`, {
@@ -42,8 +37,9 @@ export default function Home() {
     }
   }
 
-  async function editPost(post: Post) {
-    const { id, content, completed } = post;
+  // @TODO: add switch for completed-status on editDialog
+  // @TODO: order posts by completed first, then by createdAt
+  async function editPost(id: number, content: string, completed: boolean) {
     try {
       const res = await fetch(`/api/editPost`, {
         method: "PUT",
@@ -62,6 +58,10 @@ export default function Home() {
     }
   }
 
+  useEffect(() => {
+    getPosts();
+  }, []);
+
   return (
     <>
       <section className="mb-5 mt-10 flex flex-col items-center">
@@ -69,7 +69,7 @@ export default function Home() {
           <AddDialog getPosts={getPosts} />
           <Suspense fallback={<h2 className="text-2xl">Loading...</h2>}>
             <Posts
-              todos={posts}
+              posts={posts}
               deletePost={deletePost}
               getPosts={getPosts}
               editPost={editPost}

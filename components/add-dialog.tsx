@@ -64,7 +64,7 @@ export default function AddDialog({ getPosts }: Props) {
         <DialogHeader>
           <DialogTitle>Add post</DialogTitle>
           <DialogDescription>
-            <div className="grid gap-2 mt-3">
+            <div className="mt-3 grid gap-2">
               <Label htmlFor="content">Content</Label>
               <Textarea
                 id="content"

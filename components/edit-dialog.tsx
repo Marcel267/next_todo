@@ -15,24 +15,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Loader2 } from "lucide-react";
 
 type Props = {
-  editPost: (post: Post) => void;
+  editPost: (id: number, content: string, completed: boolean) => void;
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
-  postId: number;
-  completed: boolean;
-  value: string;
+  post: Post;
 };
 
 export default function EditDialog({
-  postId,
-  completed,
-  value,
+  post,
   editPost,
   isEditing,
   setIsEditing,
 }: Props) {
   const [formData, setFormData] = useState({
-    content: value,
+    content: post.content,
   });
 
   function handleChangeEvent(event: ChangeEvent<HTMLTextAreaElement>) {
@@ -74,11 +70,7 @@ export default function EditDialog({
           <DialogFooter>
             <DialogClose
               onClick={() => {
-                editPost({
-                  content: formData.content,
-                  id: postId,
-                  completed: completed,
-                });
+                editPost(post.id, formData.content, post.completed);
                 setIsEditing(true);
                 setFormData({ content: "" });
               }}

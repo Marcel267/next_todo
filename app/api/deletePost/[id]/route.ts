@@ -1,17 +1,21 @@
 import { NextResponse } from "next/server";
 import prisma from "@/lib/prisma";
 
+type Params = {
+  id: number;
+};
+
 export async function PUT(request: Request) {
   try {
-    const id = parseInt(request.url.slice(request.url.lastIndexOf("/") + 1));
+    const params: Params = await request.json();
 
-    if (!id) {
+    if (!params.id) {
       return new Error("Provided id is not valid");
     }
 
     const deletedPost = await prisma.post.delete({
       where: {
-        id: id,
+        id: params.id,
       },
     });
 

@@ -59,7 +59,7 @@ export default function Posts({
             />
             <label
               htmlFor={`${post.id}`}
-              className={`pl-7 ${
+              className={`cursor-pointer pl-7 ${
                 post.completed ? "text-muted-foreground line-through" : ""
               }`}
             >

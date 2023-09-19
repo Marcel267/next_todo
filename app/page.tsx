@@ -13,8 +13,9 @@ export default function Home() {
       .then((response) => response.json())
       .then((data) => {
         console.log(data.posts);
-        const newData = data.posts.slice(0) 
-        setPosts(newData);
+        // console.log(typeof data.posts);
+        // const newData = data.posts.slice(0);
+        setPosts([...data.posts]);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);

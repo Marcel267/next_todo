@@ -22,8 +22,9 @@ export default function Home() {
 
   async function deletePost(id: number) {
     try {
-      const res = await fetch(`/api/deletePost/${id}`, {
+      const res = await fetch(`/api/deletePost`, {
         method: "DELETE",
+        body: JSON.stringify({ id }),
       });
 
       if (res.ok) {
@@ -38,7 +39,6 @@ export default function Home() {
   }
 
   // @TODO: add switch for completed-status on editDialog
-  // @TODO: order posts by completed first, then by createdAt
   async function editPost(id: number, content: string, completed: boolean) {
     try {
       const res = await fetch(`/api/editPost`, {

@@ -5,7 +5,7 @@ type Params = {
   id: number;
 };
 
-export async function PUT(request: Request) {
+export async function DELETE(request: Request) {
   try {
     const params: Params = await request.json();
 

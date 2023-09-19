@@ -39,7 +39,6 @@ export default function Home() {
     }
   }
 
-  // @TODO: add switch for completed-status on editDialog
   async function editPost(id: number, content: string, completed: boolean) {
     try {
       const res = await fetch(`/api/editPost`, {

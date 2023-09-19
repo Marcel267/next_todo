@@ -1,0 +1,5 @@
+@TODO:
+
+- add switch for completed-status on editDialog
+- add loader when clicking on checkbox
+- make responsive

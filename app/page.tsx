@@ -12,8 +12,9 @@ export default function Home() {
     fetch("/api/getPosts")
       .then((response) => response.json())
       .then((data) => {
-        setPosts(data.posts);
-        // console.log(data.posts);
+        console.log(data.posts);
+        const newData = data.posts.slice(0) 
+        setPosts(newData);
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
